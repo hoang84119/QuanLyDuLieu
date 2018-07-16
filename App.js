@@ -23,28 +23,31 @@ export default class App extends Component {
 
   render() {
     return (
-      <FlatList
-        refreshing={this.state.refreshing}
-        onRefresh={this._refreshing}
-        data={data}
-        keyExtractor={(item, index) => index.toString()}
-        renderItem={({ item }) => (
-          <View style={myStyle.container}>
-            <Image source={{ uri: item.image.value }} style={myStyle.image} />
-            <FlatList
-              style={myStyle.item}
-              data={Object.values(item.info)}
-              keyExtractor={(item, index) => index.toString()}
-              renderItem={({ item }) => (
-                // <Text style={myStyle.text}>
-                //   {item.name}: {item.value}
-                // </Text>
-                <HTML html={`${item.prepend} ${item.name}: ${item.value} ${item.append}`}/>
-              )}
-            />
-          </View>
-        )}
-      />
+      <View style={{flex:1}}>
+        <FlatList
+          //numColumns={2}
+          refreshing={this.state.refreshing}
+          onRefresh={this._refreshing}
+          data={data}
+          keyExtractor={(item, index) => index.toString()}
+          renderItem={({ item }) => (
+            <View style={myStyle.container}>
+              <Image source={{ uri: item.image.value }} style={myStyle.image} />
+              <FlatList
+                style={myStyle.item}
+                data={Object.values(item.info)}
+                keyExtractor={(item, index) => index.toString()}
+                renderItem={({ item }) => (
+                  // <Text style={myStyle.text}>
+                  //   {item.name}: {item.value}
+                  // </Text>
+                  <HTML html={`${item.prepend} ${item.name}: ${item.value} ${item.append}`}/>
+                )}
+              />
+            </View>
+          )}
+        />
+      </View>
     );
   }
 
@@ -55,16 +58,19 @@ export default class App extends Component {
 
 const myStyle = StyleSheet.create({
   container: {
-    borderColor: "#000",
-    margin: 10,
-    borderWidth: 1,
-    flexDirection: "row"
+    //borderColor: "#000",
+    marginHorizontal: 10,
+    //borderWidth: 1,
+    flexDirection: "row",
+    backgroundColor: "#fff",
+    marginVertical:5,
+    flex: 1
   },
-  image: { marginVertical: 5, width: 150, height: 150 },
+  image: { marginVertical: 5, width: 125, height: 125 },
   item:{ margin: 5, flexDirection: "column" },
   text: {
     color: "#808080",
-    fontSize: 16,
+    fontSize: 14,
     marginBottom: 5
   }
 });
